@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var forms_1 = require("@angular/forms");
+var limit_formvalidator_1 = require("./limit.formvalidator");
 var ProductFormControl = (function (_super) {
     __extends(ProductFormControl, _super);
     function ProductFormControl(label, property, value, validator) {
@@ -26,6 +27,9 @@ var ProductFormControl = (function (_super) {
                     case "pattern":
                         messages.push("The " + this.label + " contains illegal characters");
                         break;
+                    case "limit":
+                        messages.push("A " + this.label + " cannot be more than " + this.errors['limit'].limit);
+                        break;
                 }
             }
         }
@@ -43,7 +47,7 @@ var ProductFormgroup = (function (_super) {
                 forms_1.Validators.pattern("^[A-Za-z ]+$"),
                 forms_1.Validators.minLength(3),
                 forms_1.Validators.maxLength(10)])),
-            price: new ProductFormControl("Price", "price", "", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern("^[0-9\.]+$")]))
+            price: new ProductFormControl("Price", "price", "", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern("^[0-9\.]+$"), limit_formvalidator_1.LimitValidator.Limit(100)]))
         });
     }
     Object.defineProperty(ProductFormgroup.prototype, "productControls", {
