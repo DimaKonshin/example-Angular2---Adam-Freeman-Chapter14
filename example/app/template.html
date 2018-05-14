@@ -1,13 +1,14 @@
 ﻿<div class="bg-info p-a-1">
-    Selected Product: {{selectedProduct || '(None)'}}
+    Selected Product: {{product.value || '(None)'}}
 </div>
 
 <table class="table table-sm table-bordered m-t-1">
     <tr><th></th><th>Name</th><th>Category</th><th>Price</th></tr>
     <tr *ngFor="let item of getProducts();let i = index;"
-        [class.bg-info]="getSelected(item)"
+        (mouseover)="product.value=item.name"
+        [class.bg-info]="product.value==item.name"
         >
-        <td (mouseover)="selectedProduct=item.name">{{i+1}}</td>
+        <td>{{i+1}}</td>
         <td>{{item.name}}</td>
         <td>{{item.category}}</td>
         <td *ngIf="!last">{{item.price}}</td>
@@ -16,5 +17,5 @@
 
 <div class="form-group">
     <label>Product Name</label>
-    <input class="form-control" (input)="selectedProduct=$event.target.value" />
+    <input #product class="form-control" (input)="false" />
 </div>
