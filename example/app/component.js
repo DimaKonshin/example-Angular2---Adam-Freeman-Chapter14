@@ -32,6 +32,26 @@ var ProductComponent = (function () {
     ProductComponent.prototype.addProduct = function (p) {
         console.log("New Product: " + this.jsonProduct);
     };
+    ProductComponent.prototype.getValidationMessages = function (state, thingName) {
+        var thing = state.path || thingName;
+        var messages = [];
+        if (state.errors) {
+            for (var errorName in state.errors) {
+                switch (errorName) {
+                    case "required":
+                        messages.push("You must enter a " + thing);
+                        break;
+                    case "minlength":
+                        messages.push("A " + thing + " must be at least " + state.errors['minlength'].requiredLength + " characters");
+                        break;
+                    case "pattern":
+                        messages.push("The " + thing + " contains illegal characters");
+                        break;
+                }
+            }
+        }
+        return messages;
+    };
     ProductComponent = __decorate([
         core_1.Component({
             selector: "app",
