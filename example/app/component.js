@@ -62,6 +62,15 @@ var ProductComponent = (function () {
             this.formSubmitted = false;
         }
     };
+    ProductComponent.prototype.getFormValidationMessages = function (form) {
+        var _this = this;
+        var messages = [];
+        Object.keys(form.controls).forEach(function (k) {
+            _this.getValidationMessages(form.controls[k], k)
+                .forEach(function (m) { return messages.push(m); });
+        });
+        return messages;
+    };
     ProductComponent = __decorate([
         core_1.Component({
             selector: "app",
