@@ -12,6 +12,25 @@ var ProductFormControl = (function (_super) {
         this.label = label;
         this.modelProperty = property;
     }
+    ProductFormControl.prototype.getValidationMessages = function () {
+        var messages = [];
+        if (this.errors) {
+            for (var errorName in this.errors) {
+                switch (errorName) {
+                    case "required":
+                        messages.push("You must enter a " + this.label);
+                        break;
+                    case "minlength":
+                        messages.push("A " + this.label + " must be at least " + this.errors['minlength'].requiredLength + " characters");
+                        break;
+                    case "pattern":
+                        messages.push("The " + this.label + " contains illegal characters");
+                        break;
+                }
+            }
+        }
+        return messages;
+    };
     return ProductFormControl;
 }(forms_1.FormControl));
 exports.ProductFormControl = ProductFormControl;
@@ -35,6 +54,12 @@ var ProductFormgroup = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ProductFormgroup.prototype.getFormValidationMessages = function (form) {
+        var messages = [];
+        this.productControls.forEach(function (c) { return c.getValidationMessages()
+            .forEach(function (m) { return messages.push(m); }); });
+        return messages;
+    };
     return ProductFormgroup;
 }(forms_1.FormGroup));
 exports.ProductFormgroup = ProductFormgroup;
