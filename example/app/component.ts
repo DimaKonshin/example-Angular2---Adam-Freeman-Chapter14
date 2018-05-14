@@ -1,6 +1,8 @@
 ﻿import { ApplicationRef, Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
+import { NgFor } from "@angular/common";
 
 @Component({
     selector: "app",
@@ -47,5 +49,17 @@ export class ProductComponent {
             }
         }
         return messages;
+    }
+
+    formSubmitted: boolean = false;
+
+    submitForm(form: NgForm) {
+        this.formSubmitted = true;
+        if (form.valid) {
+            this.addProduct(this.newProduct);
+            this.newProduct = new Product();
+            form.reset();
+            this.formSubmitted = false;
+        }
     }
 }
