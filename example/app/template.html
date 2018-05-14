@@ -1,13 +1,12 @@
 ﻿<div class="bg-info p-a-1">
-    Selected Product: {{product.value || '(None)'}}
+    Selected Product: {{selectedProduct || '(None)'}}
 </div>
 
 <table class="table table-sm table-bordered m-t-1">
     <tr><th></th><th>Name</th><th>Category</th><th>Price</th></tr>
     <tr *ngFor="let item of getProducts();let i = index;"
-        (mouseover)="product.value=item.name"
-        [class.bg-info]="product.value==item.name">
-        <td>{{i+1}}</td>
+        [class.bg-info]="getSelected(item)">
+        <td (mouseover)="selectedProduct=item.name">{{i+1}}</td>
         <td>{{item.name}}</td>
         <td>{{item.category}}</td>
         <td *ngIf="!last">{{item.price}}</td>
@@ -16,23 +15,12 @@
 
 <div class="form-group">
     <label>Product Name</label>
-    <input #product class="form-control" (input)="false" />
-</div>
-
-<div class="bg-info p-a-1">
-    MyChange: {{my || '(None)'}}
+    <input #product class="form-control" (input)="selectedProduct=$event.target.value" 
+           [value]="selectedProduct || ''"/>
 </div>
 
 <div class="form-group">
-    <label>My Change</label>
-    <input #myChange class="form-control" (keyup)="my=myChange.value" />
-</div>
-
-<div class="bg-info p-a-1">
-    MyChange2: {{my2 || '(None)'}}
-</div>
-
-<div class="form-group">
-    <label>My Change</label>
-    <input #myChange2 class="form-control" (keyup.enter)="my2=myChange2.value" />
+    <label>Product Name</label>
+    <input #product class="form-control" (input)="selectedProduct=$event.target.value"
+           [value]="selectedProduct || ''" />
 </div>
