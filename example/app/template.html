@@ -1,7 +1,11 @@
-﻿<table class="table table-sm table-bordered m-t-1">
+﻿<div class="bg-info p-a-1">
+    Selected Product: {{selectedProduct || '(None)'}}
+</div>
+
+<table class="table table-sm table-bordered m-t-1">
     <tr><th></th><th>Name</th><th>Category</th><th>Price</th></tr>
     <tr *ngFor="let item of getProducts();let i = index;">
-        <td>{{i+1}}</td>
+        <td (mouseover)="selectedProduct=item.name">{{i+1}}</td>
         <td>{{item.name}}</td>
         <td>{{item.category}}</td>
         <td *ngIf="!last">{{item.price}}</td>
