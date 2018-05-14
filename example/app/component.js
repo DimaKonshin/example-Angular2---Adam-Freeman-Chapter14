@@ -20,6 +20,9 @@ var ProductComponent = (function () {
     ProductComponent.prototype.getProducts = function () {
         return this.model.getProducts();
     };
+    ProductComponent.prototype.getSelected = function (product) {
+        return product.name == this.selectedProduct;
+    };
     ProductComponent = __decorate([
         core_1.Component({
             selector: "app",
