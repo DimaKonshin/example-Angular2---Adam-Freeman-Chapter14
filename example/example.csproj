@@ -91,6 +91,7 @@
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\component.ts" />
     <TypeScriptCompile Include="app\datasource.model.ts" />
+    <TypeScriptCompile Include="app\form.model.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\product.model.ts" />
     <TypeScriptCompile Include="app\repository.model.ts" />
