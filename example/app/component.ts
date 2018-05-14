@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
 import { NgFor } from "@angular/common";
+import { ProductFormgroup } from "./form.model";
 
 @Component({
     selector: "app",
@@ -11,6 +12,7 @@ import { NgFor } from "@angular/common";
 })
 export class ProductComponent {
     model: Model = new Model();
+    form: ProductFormgroup = new ProductFormgroup();
 
     getProduct(key: number): Product {
         return this.model.getProduct(key);
@@ -30,8 +32,6 @@ export class ProductComponent {
         console.log("New Product: " + this.jsonProduct);
     }
 
-    
-
     formSubmitted: boolean = false;
 
     submitForm(form: NgForm) {
@@ -42,7 +42,5 @@ export class ProductComponent {
             form.reset();
             this.formSubmitted = false;
         }
-    }
-
-    
+    } 
 }

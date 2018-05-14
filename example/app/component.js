@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var repository_model_1 = require("./repository.model");
 var product_model_1 = require("./product.model");
+var form_model_1 = require("./form.model");
 var ProductComponent = (function () {
     function ProductComponent() {
         this.model = new repository_model_1.Model();
+        this.form = new form_model_1.ProductFormgroup();
         this.newProduct = new product_model_1.Product();
         this.formSubmitted = false;
     }
